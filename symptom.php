@@ -11,10 +11,9 @@
 	}
 </style>
 <?php
-session_start();
 	error_reporting(0);
-	$con = mysql_connect("localhost","root","","pdc");
-	mysql_select_db("pdc");
+	$con = mysqli_connect("localhost","root","","pdc");
+	mysqli_select_db($con,"pdc");
 	$sel="select * from disease where symptom = '";
 	$area = $_POST["txtarea"];
 	$symptom = explode ("\r\n",$area);
@@ -33,8 +32,8 @@ session_start();
 			$sel = $sel."'";
 		}
 	}
-	$exe=mysql_query($sel);
-	$total_rows_op = mysql_num_rows($exe);
+	$exe=mysqli_query($con,$sel);
+	$total_rows_op = mysqli_num_rows($exe);
 	if($total_rows_op == 0)
 	{
 		echo "<script>alert('No Disease Found for the Given SYMPTOMS. Please try Again.')</script>";
@@ -49,7 +48,7 @@ session_start();
 		<?php
 			$zero = 0;
 			$wait = "insert into wait set p_username = '".$_SESSION['udid']."' , symptom = '$testing' , flag= $zero ";
-			$wait_exe=mysql_query($wait);
+			$wait_exe=mysqli_query($con,$wait);
 			echo '<script>window.location="doctor_resp.php"</script>';
 			?>
 		</div>

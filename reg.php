@@ -3,11 +3,11 @@
 error_reporting(0);
     //if(isset($_POST["reg"]))
     {
-        $con_r = mysql_connect("localhost","root","","pdc");
-        mysql_select_db("pdc");
+        $con_r = mysqli_connect("localhost","root","","pdc");
+        mysqli_select_db($con_r,"pdc");
         $querry_check = "select * from patient where p_username = '".$_POST["uname"]."'";
-        $exe_r=mysql_query($querry_check);
-        $total_rows_r = mysql_num_rows($exe_r);
+        $exe_r=mysqli_query($con_r,$querry_check);
+        $total_rows_r = mysqli_num_rows($exe_r);
 
         if($total_rows_r == 1)
         {
@@ -29,7 +29,7 @@ error_reporting(0);
              name = '$name_r', age  = '$age_r', district = '$district_r' ,
               pin  = '$pin_r', state = '$state_r' , country = '$country_r' , 
               phone = '$number_r' , email = '$email_r' , password  = '$pss_r'";
-            $exe_r1=mysql_query($querry_insert_r);
+            $exe_r1=mysqli_query($con_r,$querry_insert_r);
             echo '<script>window.location="patient.php"</script>';
         }
     }

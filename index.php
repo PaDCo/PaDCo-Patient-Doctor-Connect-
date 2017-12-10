@@ -5,16 +5,15 @@ session_start();
   {
   $usr = $_POST["uname"];
   $pss = $_POST["psw"];
-  $con = mysql_connect("localhost","root","","pdc");
-  mysql_select_db("pdc");
+  $con = mysqli_connect("localhost","root","","pdc");
+  mysqli_select_db($con,"pdc");
   $sel="select * from patient where p_username = '".$usr."' AND password = '".$pss."'";
-  $exe=mysql_query($sel);
-  $total_rows = mysql_num_rows($exe);
+  $exe=mysqli_query($con,$sel);
+  $total_rows = mysqli_num_rows($exe);
   if($total_rows == 1)
   {
-    $fetch=mysql_fetch_array($exe);
+    $fetch=mysqli_fetch_array($exe);
     $_SESSION['udid']=$fetch['p_username'];
-    echo $_SESSION['udid'];
     echo '<script>window.location="patient.php"</script>';
   }
   if($total_rows == 0)
@@ -24,7 +23,15 @@ session_start();
 }
 if(isset($_POST["reg"]))
   {
+
+  $email = $_POST['email'];
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    echo "<script>alert('Provide Valid Email');</script>";
+  }
+  else
+  {
     include('reg.php');
+  }
 }
 if(isset($_POST["login_doc"]))
 {
@@ -32,7 +39,14 @@ if(isset($_POST["login_doc"]))
 }
 if(isset($_POST['reg_doc']))
 {
+  $email = $_POST['email'];
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    echo "<script>alert('Provide Valid Email');</script>";
+  }
+  else
+  {
   include('reg_doc.php');
+}
 }
 ?>
 <!DOCTYPE html>
@@ -409,14 +423,21 @@ button {
 </div>
 
 <script>
- function myfunction()
+  function myfunction()
  {
   document.getElementById('id01').style.display='none';
   document.getElementById('id02').style.display='block';
  }
+  function myfunction_doc()
+ {
+  document.getElementById('id03').style.display='none';
+  document.getElementById('id04').style.display='block';
+ }
 // Get the modal
 var modal1 = document.getElementById('id01');
 var modal2 = document.getElementById('id02');
+var modal3 = document.getElementById('id03');
+var modal4 = document.getElementById('id04');
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal1) {
@@ -425,19 +446,6 @@ window.onclick = function(event) {
     if (event.target == modal2) {
         modal2.style.display = "none";
     }
-  }
-
-
- function myfunction_doc()
- {
-  document.getElementById('id03').style.display='none';
-  document.getElementById('id04').style.display='block';
- }
-// Get the modal
-var modal3 = document.getElementById('id03');
-var modal4 = document.getElementById('id04');
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
     if (event.target == modal3) {
         modal3.style.display = "none";
     }
@@ -446,7 +454,7 @@ window.onclick = function(event) {
     }
   }
 
-
+ 
 </script>
 <script>
 $(document).ready(function(){

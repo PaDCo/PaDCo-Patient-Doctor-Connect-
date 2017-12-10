@@ -23,13 +23,13 @@
 session_start();
   include('head.php');
 	error_reporting(0);
-	$con_testing = mysql_connect("localhost","root","","pdc");
-	mysql_select_db("pdc");
+	$con_testing = mysqli_connect("localhost","root","","pdc");
+	mysqli_select_db($con_testing,"pdc");
 	$symp="select * from wait where p_username = '".$_SESSION['udid']."'";
 
-	$symp_exe=mysql_query($symp);
+	$symp_exe=mysqli_query($con_testing,$symp);
 	$sel_disease = "select * from disease where symptom = '";
-		while ($rowed=mysql_fetch_array($symp_exe))	 {
+		while ($rowed=mysqli_fetch_array($symp_exe))	 {
 			$sum=$rowed[1];
 	}
 	$symptoms_new = explode (",",$sum);
@@ -47,8 +47,8 @@ session_start();
 			$sel_disease = $sel_disease."'";
 		}
 	}
-	$exe_sel=mysql_query($sel_disease);
-	$total_rows_op_test = mysql_num_rows($exe_sel);
+	$exe_sel=mysqli_query($con_testing,$sel_disease);
+	$total_rows_op_test = mysqli_num_rows($exe_sel);
 	if($total_rows_op_test == 0)
 	{
 		echo "<script>alert('No Disease Found for the Given SYMPTOMS. Please try Again.')</script>";
@@ -59,7 +59,7 @@ session_start();
  	$my = '';
  	$test = array();
  	$counting = array();
-	while ($row=mysql_fetch_array($exe_sel))	 {
+	while ($row=mysqli_fetch_array($exe_sel))	 {
 			$s=$row[2];
 			$my = $my.$s;
 			$my = $my.',';
@@ -91,9 +91,9 @@ session_start();
 	}
 	echo "<div class='beemari' id='01'><b>You are suffering from : </b>$test[$index]</div>";
 	$sel="select * from cure where disease ='".$test[$index]."'";
-	$exe=mysql_query($sel);
+	$exe=mysqli_query($con_testing,$sel);
 	error_reporting(0);	
-	while ($row=mysql_fetch_array($exe))	 {
+	while ($row=mysqli_fetch_array($exe))	 {
 			$medication=$row[2];
 			$precaution=$row[3];
 	}
