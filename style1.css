@@ -28,6 +28,7 @@
   {
     font-family:Comic Sans MS, Comic Sans, cursive;
     text-align: center;
+    text-decoration: underline;
   }
   .header1{
     color: grey;
@@ -62,12 +63,23 @@
     font-size: 30px;
 cursor:pointer;
   }
+.footer
+{
+   background-color:blue;
+    opacity: 0.7;
+    height: 80px;
+    color: white;
+    text-align: center;
+    font-family:Comic Sans MS, Comic Sans, cursive;
+    font-size: 30px;
+    padding-top: 20px;
 
+}
 .model1{
   padding: 20px;
 }
 .model2{
-  padding: 20px; 
+  padding: 20px;
 }
 .model1 input{
   margin-bottom: 15px;
@@ -114,6 +126,18 @@ cursor:pointer;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
+}
+.modal11110{
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;  
 }
 /* Modal Content/Box */
 .modal-content {

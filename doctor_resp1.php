@@ -5,32 +5,30 @@
 		margin-left: 38%;
 		margin-right: 25%;
 	}
-	.footer
-{
-   background-color:blue;
-    opacity: 0.7;
-    height: 80px;
-    color: white;
-    text-align: center;
-    font-family:Comic Sans MS, Comic Sans, cursive;
-    font-size: 30px;
-    padding-top: 20px;
-    margin-top: 300px;
-
-}
+	.footer{
+	    background-color:blue;
+	    opacity: 0.7;
+	    height: 80px;
+	    color: white;
+	    text-align: center;
+	    font-family:Comic Sans MS, Comic Sans, cursive;
+	    font-size: 30px;
+	    padding-top: 20px;
+	    margin-top: 300px;
+	}
 </style>
 <?php
-session_start();
-  include('head.php');
+    session_start();
+    include('head1.php');
+    include('session.php');
 	error_reporting(0);
 	$con_testing = mysqli_connect("localhost","root","","pdc");
 	mysqli_select_db($con_testing,"pdc");
 	$symp="select * from wait where p_username = '".$_SESSION['udid']."'";
-
 	$symp_exe=mysqli_query($con_testing,$symp);
 	$sel_disease = "select * from disease where symptom = '";
 		while ($rowed=mysqli_fetch_array($symp_exe))	 {
-			$sum=$rowed[1];
+			$sum=$rowed[2];
 	}
 	$symptoms_new = explode (",",$sum);
 	$symptom_array = array();

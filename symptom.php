@@ -42,12 +42,22 @@
 	else
 	{
 		?>
+		<style type="text/css">
+			#test{
+				display: none;
+			}
+		</style>
 		<div class="xyz">
 			<h1 >Waiting for Doctor Response...</h1>
+			<?php
+			include('delay.php');
+			?>
 		</div>	
 		<?php
-			$zero = 0;
-			$wait = "insert into wait set p_username = '".$_SESSION['udid']."' , symptom = '$testing' , flag= $zero ";
+			$zero = 0;			
+			date_default_timezone_set('Asia/Kolkata');
+			$d = date("y/m/d H:i:s");
+			$wait = "insert into wait set p_username = '".$_SESSION['udid']."' , symptom = '$testing' , flag= $zero, time='$d'";
 			$wait_exe=mysqli_query($con,$wait);
 			echo '<script>window.location="doctor_resp.php"</script>';
 			?>

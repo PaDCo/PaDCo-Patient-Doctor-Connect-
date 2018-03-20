@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="style1.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src
   <script sr="js/bootstrap.min.js"></script>
   <style >
 button {
@@ -23,32 +24,16 @@ button {
 }
 .new
 {
-  margin-left: 88%;
-  margin-bottom: 20px;
-}
-.btn101
-{
-  font-size: 31px;
-  font-family:Comic Sans MS, Comic Sans, cursive;
-  color: white; 
-  position:relative;
-  top: 10px; 
-}
-.new a:hover{
-  color: white;
-  text-decoration: none;
-}
-.test a:hover{
-  color:white;
-  text-decoration: none;
+  margin-left: 50%;
+  margin-bottom: 8px;
 }
 </style>
 </head>
 <body >
   <div class="container-fluid ">
     <div class="row">
-      <div class="col-sm-7 test">
-        <a href="index.php"><h1 class="header1">PatientDoctorConnect</h1></a>
+      <div class="col-sm-7">
+        <h1 class="header1">PatientDoctorConnect</h1>
       </div>
       <div class="col-sm-5">
         <h3 class="header3">Care today, Just a CLICK away...</h3>
@@ -56,12 +41,10 @@ button {
     </div>
   </div>
  <div class="container-fluid hello" id="navbar">
-<div class="row">
+<div class="row ">
 
     <div class="new">      
-      <a href="logout.php" class="btn101">
-          <span class="glyphicon glyphicon-log-out "></span> Log Out
-        </a>
+      <a href="doctor.php"><h3 class="glyphicon glyphicon-home"></h3></a>
     </div>
 </div>
 </div>

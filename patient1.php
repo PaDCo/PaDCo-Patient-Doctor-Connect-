@@ -3,56 +3,54 @@ error_reporting(0);
 $connection = mysqli_connect("localhost","root","","pdc");
 mysqli_select_db($connection,"pdc");
 session_start();
-$sel="select * from doctor where d_username='".$_SESSION['udid1']."'";
+include('session.php');
+$sel="select * from patient where p_username='".$_SESSION['udid']."'";
 $exe=mysqli_query($connection,$sel);
 $fetch=mysqli_fetch_array($exe);
 $name=$fetch[1];
-$mobno=$fetch[3];
-$email=$fetch[4];
+$mobno=$fetch[7];
+$email=$fetch[8];
 $adr=$fetch[5];
 ?>
-<style>
-.noti{
-  font-size: 35px;
-  font-family:Comic Sans MS, Comic Sans, cursive;
-  margin-top : 30px;
-  margin-left : 30px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PaDCo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script sr="js/bootstrap.min.js"></script>
+  <style>
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
 }
-.output{
-  margin-top: 10px;
-  font-size: 20px;
-  margin-left : 30px;
-  font-family: Comic Sans MS, Comic Sans, cursive;
+.glyphicon{
+  color: white;
+  font-size: 30px;
 }
-.but{
-  margin-top: 60px;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+.new
+{
+  margin-left: 50%;
+  margin-bottom: 8px;
 }
-.new_class{
-  display: none;
-}
-.new_label2{
-   margin-top: 70px;
-  font-size: 20px;
-  margin-left : 30px;
-  font-family: Comic Sans MS, Comic Sans, cursive;
-}
-.new_label{
-   margin-top: 30px;
-  font-size: 20px;
-  margin-left : 30px;
-  font-family: Comic Sans MS, Comic Sans, cursive;
-}
-.new_label1{
-  margin-left: 30px;
-  width: 50%;
-}
-.welcome{
-  text-align : left;
-  font-size : 20px;
-}
+.footer
+{
+   background-color:blue;
+    opacity: 0.7;
+    height: 80px;
+    color: white;
+    text-align: center;
+    font-family:Comic Sans MS, Comic Sans, cursive;
+    font-size: 30px;
+    padding-top: 20px;
+  }
 .temp
 {
   height: 50px;
@@ -65,6 +63,7 @@ $adr=$fetch[5];
 }
 .brd
 {
+  border: 0px;
   background: white;
   font-family:Comic Sans MS, Comic Sans, cursive;
 }
@@ -73,45 +72,26 @@ $adr=$fetch[5];
     margin:auto; /* 5% from the top, 15% from the bottom and centered */
     margin-top: 10px;
     width: 50%; /* Could be more or less, depending on screen size */
-    height : 47%;
-}
-.footer
-{
-   background-color:blue;
-    opacity: 0.7;
-    height: 80px;
-    color: white;
-    text-align: center;
-    font-family:Comic Sans MS, Comic Sans, cursive;
-    font-size: 30px;
-    padding-top: 20px;
+    height : 80%;
 }
 </style>
-<?php
-session_start();
-  include('head.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Doctor</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="style1.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script sr="js/bootstrap.min.js"></script>
 </head>
 <body>
+	<?php include 'head.php'; ?>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-4">
 <div class="temp">
-<a href="doc_noti.php">Respond to Queries</a>
+<a href="patient.php">Disease Checker</a>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-4">
 <div class="temp">
-<a href='1doc_chat.php'>Chat</a>
+<a href="previous.php ">Previous</a>
+</div>
+</div>
+<div class="col-md-4">
+<div class="temp">
+<a href="chat.php ">Chat</a>
 </div>
 </div>
 </div>
@@ -123,10 +103,10 @@ session_start();
     </div>
     <div class="row">
       <div class="col-md-6">
-      <label><b><h2 style="padding-left: 100px">Doctor Name:</h2></b></label>
+      <label><b ><h2 style="padding-left: 100px">Patient Name:</h2></b></label>
     </div>
     <div class="col-md-6">
-    <h2><?php echo $name; ?></h2>
+	<h2><?php echo $name; ?></h2>
     </div>
     </div>
     <div class="row">
@@ -148,7 +128,7 @@ session_start();
      <div class="row">
       <div class="col-md-6">
       <label><b ><h2 style="padding-left: 100px">Address:</h2></b></label>
-      </div>
+    </div>
     <div class="col-md-6">
     <h2><?php echo $adr; ?></h2>
     </div>
@@ -163,5 +143,4 @@ session_start();
     © 2017 PatientDoctorConnect Pvt. Ltd. All rights reserved
 </div>
 </body>
-
 </html>

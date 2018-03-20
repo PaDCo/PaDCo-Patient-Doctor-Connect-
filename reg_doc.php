@@ -3,6 +3,7 @@
 error_reporting(0);
     //if(isset($_POST["reg"]))
     {
+        session_start();
         $con_r_doc = mysqli_connect("localhost","root","","pdc");
         mysqli_select_db($con_r_doc,"pdc");
         $querry_check_doc = "select * from doctor where d_username = '".$_POST["uname_doc"]."'";
@@ -32,6 +33,7 @@ error_reporting(0);
               pin  = '$pin_doc', state = '$state_doc' , country = '$country_doc', rating = '$testingnng' ,
                patients_treated = '$testingnng', password  = '$pss_doc'";
             $exe_r1_doc=mysqli_query($con_r_doc,$querry_insert_doc);
+            $_SESSION['udid1']=$usr_doc;
             echo '<script>window.location="doctor.php"</script>';
         }
     }

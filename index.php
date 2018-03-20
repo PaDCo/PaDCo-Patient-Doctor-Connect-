@@ -14,7 +14,7 @@ session_start();
   {
     $fetch=mysqli_fetch_array($exe);
     $_SESSION['udid']=$fetch['p_username'];
-    echo '<script>window.location="patient.php"</script>';
+    echo '<script>window.location="patient1.php"</script>';
   }
   if($total_rows == 0)
   {
@@ -52,7 +52,7 @@ if(isset($_POST['reg_doc']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>PaDCo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
@@ -119,7 +119,10 @@ button {
 </style>
 </head>
 <body >
-  <div class="container-fluid ">
+
+
+<!-- Main Header -->
+<div class="container-fluid ">
     <div class="row">
       <div class="col-sm-7">
         <a href="index.php" style="text-decoration:none"><h1 class="header1">PatientDoctorConnect</h1></a>
@@ -128,7 +131,12 @@ button {
         <h3 class="header3">Care today, Just a CLICK away...</h3>
       </div>
     </div>
-  </div>
+</div>
+<!-- End Of Main Heade -->
+
+
+
+<!-- Start Of Menu -->
 <div class="container-fluid hello" id="navbar">
   <div class="row ">
     <div class="col-xs-3 col-sm-6 col-lg-9">
@@ -138,14 +146,67 @@ button {
       <h3 class="headinghi">You Are:</h3>
     </div>
     <div class=" col-xs-3 col-sm-2 col-lg-1">
-      <h3 class="heading5" onclick="document.getElementById('id01').style.display='block'">Patient</h3>
+      <h3 class="heading5" onclick="<?php
+                                       if($_SESSION['udid'] == ' ' || $_SESSION['udid'] == NULL)
+                                       {
+                                          if($_SESSION['udid1'] == ' ' || $_SESSION['udid1'] == NULL)
+                                          {
+                                        ?> 
+                                  document.getElementById('id01').style.display='block';
+                                        <?php 
+                                          }
+                                          else
+                                          {
+                                            ?>
+                                            var txt = 'You are already logged in as Doctor. Please Logout to continue';
+                                            alert(txt);
+                                          <?php
+                                          }
+                                    } 
+                                  else 
+                                    {
+                                    ?> 
+                                    window.location='patient1.php';
+                                    <?php
+                                    } 
+                                        ?> ">Patient</h3>
     </div>
     <div class="col-xs-3 col-sm-2 col-lg-1">
-      <h3 class="heading4" onclick="document.getElementById('id03').style.display='block'">Doctor</h3>
+      <h3 class="heading4" onclick="<?php
+                                      if($_SESSION['udid1'] == ' ' || $_SESSION['udid1'] == NULL)
+                                       {
+                                       if($_SESSION['udid'] == ' ' || $_SESSION['udid'] == NULL)
+                                          {
+                                        ?> 
+                                  document.getElementById('id03').style.display='block';
+                                        <?php 
+                                          }
+                                          else
+                                          {
+                                            ?>
+                                            var txt = 'You are already logged in as Patient. Please Logout to continue';
+                                            alert(txt);
+                                          <?php
+                                          }
+                                    } 
+                                  else 
+                                    {
+                                    ?> 
+                                    window.location='doctor.php';
+                                    <?php
+                                    } 
+                                        ?> ">Doctor</h3>
     </div>
   </div>
 </div>
+<!-- End Of Menu -->
+
+
+
 <div>
+
+
+<!-- Start Of Slider -->
 <div class="container-fluid ">
   <div class="col-md-12 col-xs-12 col-lg-12">
   <br> 
@@ -169,7 +230,8 @@ button {
       </div>
       
       </div>
-    </div>
+   
+      </div>
  <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left"></span>
@@ -182,18 +244,31 @@ button {
   </div>
   </div>
 </div>
+<!-- End Of Slider -->
+
 <br>
 <br>
 <br>
+
+
+<!-- Start Of About Us -->
 <div>
   <div class="col-md-12 text-center"><h1>About Us</h1> </div>
   <h3 style="text-align:center" class="abt"><p >Patient Doctor Connect is a platform for immediate consulatancy from various doctor around the globe.Any patient could get immediate consulatancy from doctor who are avaialable online</p>
   <p>If no doctor is able to respond to querry of a patient then after a fixed amount of time an AI would respond to the query giving result in first a few seconds</p></h3>
 </div>
+<!-- End Of about us -->
+
 <br>
 <br>
 <br>
+
+
+
 <div>
+
+
+<!-- Start Of common diseases -->
 <div class="container-fluid text-center">
   <div class="col-md-12">
   <h1>Common Diseases</hi>
@@ -219,14 +294,20 @@ button {
        </div>
   </div>
 </div>
+<!-- End of common diseases -->
 
 <br>
 <br>
 <br>
+
+
+<!-- Footer start -->
 <div class="col-md-12 footer">
     © 2017 PatientDoctorConnect Pvt. Ltd. All rights reserved
 </div>
+<!-- Footer end -->
 
+<!-- Main Modal enter on click of patient -->
 <div id="id01" class="modal">
   <div onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</div>
   <form class="modal-content model1" method="POST" >
@@ -251,6 +332,9 @@ button {
     </div>
   </form>
 </div>
+<!-- End of Main Modal -->
+
+<!-- Main Modal Register Page(Patient) -->
 <div id="id02" class="modal">
   <div onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">X</div>
   <form class="modal-content1 model2" method="POST" >
@@ -323,9 +407,9 @@ button {
     </div>
   </form>
 </div>
+<!-- End Of main modal(patient) -->
 
-
-
+<!-- Main Modal enter on click of Doctor -->
 <div id="id03" class="modal">
   <div onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">X</div>
   <form class="modal-content model1" method="POST" >
@@ -350,6 +434,9 @@ button {
     </div>
   </form>
 </div>
+<!-- End of Main Modal -->
+
+<!-- Main Modal Register Page(Doctor) -->
 <div id="id04" class="modal">
   <div onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">X</div>
   <form class="modal-content1 model2" method="POST" >
@@ -421,6 +508,8 @@ button {
     </div>
   </form>
 </div>
+<!-- End Of main modal(Doctor) -->
+
 
 <script>
   function myfunction()

@@ -3,6 +3,7 @@
 error_reporting(0);
     //if(isset($_POST["reg"]))
     {
+        session_start();
         $con_r = mysqli_connect("localhost","root","","pdc");
         mysqli_select_db($con_r,"pdc");
         $querry_check = "select * from patient where p_username = '".$_POST["uname"]."'";
@@ -29,8 +30,9 @@ error_reporting(0);
              name = '$name_r', age  = '$age_r', district = '$district_r' ,
               pin  = '$pin_r', state = '$state_r' , country = '$country_r' , 
               phone = '$number_r' , email = '$email_r' , password  = '$pss_r'";
+            $_SESSION['udid']=$usr_r;
             $exe_r1=mysqli_query($con_r,$querry_insert_r);
-            echo '<script>window.location="patient.php"</script>';
+            echo '<script>window.location="patient1.php"</script>';
         }
     }
 ?>
